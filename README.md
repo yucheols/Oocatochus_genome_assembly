@@ -1,4 +1,4 @@
-# Oocatochus_genome_assembly
+# Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
 *Oocatochus rufodorsatus* PacBio genome assembly
 
 ![snake](etc/large.jpg)
