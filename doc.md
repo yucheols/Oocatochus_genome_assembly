@@ -1,9 +1,9 @@
 # Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
 *Oocatochus rufodorsatus* PacBio HiFi genome assembly. Workflow adapted from: https://github.com/danielagarciacobos4/PacBio_GenomeAssembly_annotation
 
-__1. *k*-mer analysis of raw reads using jellyfish__
-__2. Genome assembly using hifiasm__
-__3. BUSCO__
+1. __*k*-mer analysis of raw reads using jellyfish__
+2. __Genome assembly using hifiasm__
+3. __BUSCO__
 
 ## Basic structure of a job script
 A typical SLURM job script has a structure similar to this:
