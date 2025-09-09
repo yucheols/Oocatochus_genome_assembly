@@ -5,7 +5,7 @@
 2. __Genome assembly using hifiasm__
 3. __BUSCO__
 
-## 1) Basic structure of a job script
+## 1) Basic structure of a SLURM job script
 A typical SLURM job script has a structure similar to this:
 
 ```
