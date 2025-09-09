@@ -5,7 +5,7 @@
 2. __Genome assembly using hifiasm__
 3. __BUSCO__
 
-## Basic structure of a job script
+## 1) Basic structure of a job script
 A typical SLURM job script has a structure similar to this:
 
 ```
@@ -45,7 +45,7 @@ conda activate new_conda_env
 ```
 
 
-## A) *k*-mer analysis of raw reads using jellyfish
+## 2) *k*-mer analysis of raw reads using jellyfish
 Use the following script to submit a jellyfish job to Mendel
 
 ```
@@ -73,7 +73,7 @@ jellyfish histo Oocatochus_rufodorsatus_kmer.jf -t 38 > Oocatochus_rufodorsatus_
 - -o Oocatochus_rufodorsatus_kmer.jf: Output file prefix in jellyfish binary format
 - <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz): jellyfish cannot handle gzipped files directly. zcat decompresses the gzipped FASTQ file without creating a new file on the disk ("<(...)" acts as a temporary file)
 
-## B) Genome assembly with hifiasm
+## 3) Genome assembly with hifiasm
 Use the following script to submit a hifiasm job to Mendel
 
 ```
