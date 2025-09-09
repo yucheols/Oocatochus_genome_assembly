@@ -19,6 +19,9 @@ A typical SLURM job script has a structure similar to this:
 #SBATCH --mail-user=your_email@address.com
 #SBATCH --output=output_name-%j-%x.out
 
+source ~/.bash_profile
+conda activate my_conda_env
+
 package_name parameters .....
 ```
 
@@ -32,6 +35,15 @@ package_name parameters .....
 - --mail-type=ALL: Sends email for all job-related events, such as job start, failure, completion, etc.
 - --mail-user=your_email@address.com: An email address to which all job-related notifications will be directed to
 - --output=output_name-%j-%x.out: "output_name" is a prefix for your output file, "%j" is the job ID assigned by SLURM, "%x" is the job name you specified with "--job-name", and ".out" is file extension 
+- source ~/.bash_profile: Reload the shell's environment settings
+- conda activate my_conda_env: Activates the conda environment for your assembly project, for example to access specific packages not already available in the cluster as a module. In the jellyfish and hifiasm job scripts below, I activate a conda environment called "mytools", which contains both jellyfish and hifiasm. I created this environment because jellyfish and hifiasm were not available as modules on Mendel HPC
+
+Create and activate new conda environment like so:
+```
+conda create -n new_conda_env
+conda activate new_conda_env
+```
+
 
 ## A) *k*-mer analysis of raw reads using jellyfish
 Use the following script to submit a jellyfish job to Mendel
