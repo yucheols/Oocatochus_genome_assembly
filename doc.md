@@ -36,9 +36,6 @@ package_name parameters .....
 ## A) *k*-mer analysis of raw reads using jellyfish
 Use the following script to submit a jellyfish job to Mendel
 
-Parameters:
-- 
-
 ```
 #!/bin/sh
 #SBATCH --job-name yshin_kmer_oocatochus
@@ -56,6 +53,13 @@ conda activate mytools
 jellyfish count -m 21 -s 1G -o Oocatochus_rufodorsatus_kmer.jf \ <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz)
 jellyfish histo Oocatochus_rufodorsatus_kmer.jf -t 38 > Oocatochus_rufodorsatus_kmer.histo
 ```
+
+### Breakdown of the input parameters:
+- jellyfish count: Tells jellyfish to start *k*-mer counting
+- -m 21: Specifies *k*-mer length of 21 nucleotides. Every substring of length 21 is counted
+- -s 1G: Determines memory allocation. 1G is usually appropriate for vertebrate genomes
+- -o Oocatochus_rufodorsatus_kmer.jf: Output file prefix in jellyfish binary format
+- <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz): jellyfish cannot handle gzipped files directly. zcat decompresses the gzipped FASTQ file without creating a new file on the disk ("<(...)" acts as a temporary file)
 
 ## B) Genome assembly with hifiasm
 Use the following script to submit a hifiasm job to Mendel
