@@ -2,4 +2,4 @@
 *Oocatochus rufodorsatus* PacBio HiFi genome assembly
 
 ![snake](etc/large.jpg)
-__*Oocatochus rufodorsatus* (AMNH 21013) collected from Chuncheon, South Korea__
+__*Oocatochus rufodorsatus* (AMNH 21013) collected from Chuncheon, South Korea (collected and photographed by Yucheol Shin)__
