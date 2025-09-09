@@ -5,8 +5,39 @@
 2. Genome assembly using hifiasm
 3. BUSCO
 
-## *k*-mer analysis of raw reads using jellyfish
+## Basic structure of a job script
+A typical SLURM job script has a structure similar to this:
+
+```
+#!/bin/sh
+#SBATCH --job-name your_job_name
+#SBATCH --nodes=1
+#SBATCH --mem=60gb
+#SBATCH --cpus-per-task=30
+#SBATCH --time=50:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=your_email@address.com
+#SBATCH --output=output_name-%j-%x.out
+
+package_name parameters .....
+```
+
+- #!/bin/sh: The shebang line. This specific syntax (#!/bin/sh) runs the script with the default shell. If #!/bin/bash is used, the script is run with bash shell
+- #SBATCH: These lines are for the SLURM job scheduler
+- --job-name: Pretty self-explanatory - specifies your job name
+- --nodes=n: Run a job on n number of compute nodes
+- --mem=ngb: Allocate n gigabytes of RAM to each node requested
+- --cpus-per-task=n: Run task with n threads
+- --time=nn:nn:nn: Maximum runtime for a job is allowed to run
+- --mail-type=ALL: Sends email for all job-related events, such as job start, failure, completion, etc.
+- --mail-user=your_email@address.com: An email address to which all job-related notifications will be directed to
+- --output=output_name-%j-%x.out: "output_name" is a prefix for your output file, "%j" is the job ID assigned by SLURM, "%x" is the job name you specified with "--job-name", and ".out" is file extension 
+
+## A) *k*-mer analysis of raw reads using jellyfish
 Use the following script to submit a jellyfish job to Mendel
+
+Parameters:
+- 
 
 ```
 #!/bin/sh
@@ -26,7 +57,7 @@ jellyfish count -m 21 -s 1G -o Oocatochus_rufodorsatus_kmer.jf \ <(zcat /home/ys
 jellyfish histo Oocatochus_rufodorsatus_kmer.jf -t 38 > Oocatochus_rufodorsatus_kmer.histo
 ```
 
-## Genome assembly with hifiasm
+## B) Genome assembly with hifiasm
 Use the following script to submit a hifiasm job to Mendel
 
 ```
