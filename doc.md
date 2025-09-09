@@ -1,7 +1,7 @@
 # Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
 *Oocatochus rufodorsatus* PacBio HiFi genome assembly
 
-## k-mer analysis of raw reads using jellyfish
+## *k*-mer analysis of raw reads using jellyfish
 
 ## Genome assembly with hifiasm
 Use the following script to submit a job to Mendel
