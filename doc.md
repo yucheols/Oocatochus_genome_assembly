@@ -1,5 +1,9 @@
 # Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
-*Oocatochus rufodorsatus* PacBio HiFi genome assembly
+*Oocatochus rufodorsatus* PacBio HiFi genome assembly. Workflow adapted from: https://github.com/danielagarciacobos4/PacBio_GenomeAssembly_annotation
+
+1. *k*-mer analysis of raw reads using jellyfish
+2. Genome assembly using hifiasm
+3. BUSCO
 
 ## *k*-mer analysis of raw reads using jellyfish
 
