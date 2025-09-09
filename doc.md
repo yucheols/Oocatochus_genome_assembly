@@ -25,18 +25,18 @@ conda activate my_conda_env
 package_name parameters .....
 ```
 
-- #!/bin/sh: The shebang line. This specific syntax (#!/bin/sh) runs the script with the default shell. If #!/bin/bash is used, the script is run with bash shell
-- #SBATCH: These lines are for the SLURM job scheduler
-- --job-name: Pretty self-explanatory - specifies your job name
-- --nodes=n: Run a job on n number of compute nodes
-- --mem=ngb: Allocate n gigabytes of RAM to each node requested
-- --cpus-per-task=n: Run task with n threads
-- --time=nn:nn:nn: Maximum runtime for a job is allowed to run
-- --mail-type=ALL: Sends email for all job-related events, such as job start, failure, completion, etc.
-- --mail-user=your_email@address.com: An email address to which all job-related notifications will be directed to
-- --output=output_name-%j-%x.out: "output_name" is a prefix for your output file, "%j" is the job ID assigned by SLURM, "%x" is the job name you specified with "--job-name", and ".out" is file extension 
-- source ~/.bash_profile: Reload the shell's environment settings
-- conda activate my_conda_env: Activates the conda environment for your assembly project, for example to access specific packages not already available in the cluster as a module. In the jellyfish and hifiasm job scripts below, I activate a conda environment called "mytools", which contains both jellyfish and hifiasm. I created this environment because jellyfish and hifiasm were not available as modules on Mendel HPC
+- __#!/bin/sh:__ The shebang line. This specific syntax (#!/bin/sh) runs the script with the default shell. If #!/bin/bash is used, the script is run with bash shell
+- __#SBATCH:__ These lines are for the SLURM job scheduler
+- __--job-name:__ Pretty self-explanatory - specifies your job name
+- __--nodes=n:__ Run a job on n number of compute nodes
+- __--mem=ngb:__ Allocate n gigabytes of RAM to each node requested
+- __--cpus-per-task=n:__ Run task with n threads
+- __--time=nn:nn:nn:__ Maximum runtime for a job is allowed to run
+- __--mail-type=ALL:__ Sends email for all job-related events, such as job start, failure, completion, etc.
+- __--mail-user=your_email@address.com:__ An email address to which all job-related notifications will be directed to
+- __--output=output_name-%j-%x.out:__ "output_name" is a prefix for your output file, "%j" is the job ID assigned by SLURM, "%x" is the job name you specified with "--job-name", and ".out" is file extension 
+- __source ~/.bash_profile:__ Reload the shell's environment settings
+- __conda activate my_conda_env:__ Activates the conda environment for your assembly project, for example to access specific packages not already available in the cluster as a module. In the jellyfish and hifiasm job scripts below, I activate a conda environment called "mytools", which contains both jellyfish and hifiasm. I created this environment because jellyfish and hifiasm were not available as modules on Mendel HPC
 
 Create and activate new conda environment like so:
 ```
