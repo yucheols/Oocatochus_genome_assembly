@@ -1,10 +1,11 @@
 # Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
 *Oocatochus rufodorsatus* PacBio HiFi genome assembly. Workflow adapted from: https://github.com/danielagarciacobos4/PacBio_GenomeAssembly_annotation
 
-1. __*k*-mer analysis of raw reads using jellyfish__
-2. __Genome assembly using hifiasm__
-3. __BUSCO__
-4. __Genome stats with QUAST__
+1. __Basic structure of a SLURM job script__
+2. __*k*-mer analysis of raw reads using jellyfish__
+3. __Genome assembly using hifiasm__
+4. __BUSCO__
+5. __Genome stats with QUAST__
 
 ## 1) Basic structure of a SLURM job script
 A typical SLURM job script has a structure similar to this:
@@ -128,3 +129,6 @@ conda activate mytools
 Oocatochus_assembly="/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm.bp.p_ctg.fa"
 busco -m genome -i $Oocatochus_assembly -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/busco_outfiles/Oocatochus_BUSCO -l /home/yshin/mendel-nas1/snake_genome_ass/busco/sauropsida_odb10 -f --metaeuk --offline --download_path /home/yshin/mendel-nas1/snake_genome_ass/busco
 ```
+__*NOTE:*__ If you intend to run BUSCO in offline mode, make sure to download the BUSCO sauropsida dataset before running the analysis. The dataset will be downloaded as a compressed file. Unpack this file in whatever directory you want to use, and *make sure* to specify the path to unpacked BUSCO file under the -l parameter. Otherwise the analysis will crash.  
+
+## 5) Genome stats with QUAST
