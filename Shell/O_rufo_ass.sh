@@ -6,11 +6,12 @@
 #SBATCH --time=40:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=yshin@amnh.org
-#SBATCH --output=assembly-%j-%x.out
+#SBATCH --output=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/assembly-%j-%x.out
+#SBATCH --error=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_errfiles/assembly-%j-%x.err
 
 #conda init
 
 source ~/.bash_profile
 conda activate mytools
 
-hifiasm -o Oocatochus_rufodorsatus_v1.asm -t 30 /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz
+hifiasm -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm -t 30 /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz

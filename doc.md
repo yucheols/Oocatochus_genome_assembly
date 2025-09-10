@@ -18,6 +18,7 @@ A typical SLURM job script has a structure similar to this:
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=your_email@address.com
 #SBATCH --output=output_name-%j-%x.out
+#SBATCH --error=errfile_name-%j-%x.err
 
 source ~/.bash_profile
 conda activate my_conda_env
@@ -35,6 +36,7 @@ package_name parameters .....
 - __--mail-type=ALL:__ Sends email for all job-related events, such as job start, failure, completion, etc.
 - __--mail-user=your_email@address.com:__ An email address to which all job-related notifications will be directed to
 - __--output=output_name-%j-%x.out:__ "output_name" is a prefix for your output file, "%j" is the job ID assigned by SLURM, "%x" is the job name you specified with "--job-name", and ".out" is file extension 
+- __--error=errfile_name-%j-%x.err:__ Outputs an error file
 - __source ~/.bash_profile:__ Reload the shell's environment settings
 - __conda activate my_conda_env:__ Activates the conda environment for your assembly project, for example to access specific packages not already available in the cluster as a module. In the jellyfish and hifiasm job scripts below, I activate a conda environment called "mytools", which contains both jellyfish and hifiasm. I created this environment because jellyfish and hifiasm were not available as modules on Mendel HPC
 
@@ -57,13 +59,14 @@ Use the following script to submit a jellyfish job to Mendel
 #SBATCH --time=50:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=yshin@amnh.org
-#SBATCH --output=jellyfish-%j-%x.out
+#SBATCH --output=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyfish_outfiles/jellyfish-%j-%x.out
+#SBATCH --error=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyfish_errfiles/jellyfish-%j-%x.err
 
 source ~/.bash_profile
 conda activate mytools
 
-jellyfish count -m 21 -s 1G -o Oocatochus_rufodorsatus_kmer.jf \ <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz)
-jellyfish histo Oocatochus_rufodorsatus_kmer.jf -t 38 > Oocatochus_rufodorsatus_kmer.histo
+jellyfish count -m 21 -s 1G -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyfish_outfiles/Oocatochus_rufodorsatus_kmer.jf \ <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz)
+jellyfish histo /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyfish_outfiles/Oocatochus_rufodorsatus_kmer.jf -t 38 > /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyfish_outfiles/Oocatochus_rufodorsatus_kmer.histo
 ```
 
 ### Breakdown of the input parameters:
@@ -85,12 +88,13 @@ Use the following script to submit a hifiasm job to Mendel
 #SBATCH --time=40:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=yshin@amnh.org
-#SBATCH --output=assembly-%j-%x.out
+#SBATCH --output=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/assembly-%j-%x.out
+#SBATCH --error=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_errfiles/assembly-%j-%x.err
 
 #conda init
 
 source ~/.bash_profile
 conda activate mytools
 
-hifiasm -o Oocatochus_rufodorsatus_v1.asm -t 30 /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz
+hifiasm -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm -t 30 /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz
 ```
