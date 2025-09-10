@@ -4,6 +4,7 @@
 1. __*k*-mer analysis of raw reads using jellyfish__
 2. __Genome assembly using hifiasm__
 3. __BUSCO__
+4. __Genome stats with QUAST__
 
 ## 1) Basic structure of a SLURM job script
 A typical SLURM job script has a structure similar to this:
