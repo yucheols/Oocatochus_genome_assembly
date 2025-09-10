@@ -98,3 +98,32 @@ conda activate mytools
 
 hifiasm -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm -t 30 /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz
 ```
+
+## 4) BUSCO analysis of the assembled genome
+After running hifiasm, you will get a whole bunch of output files. We need a FASTA file of the assembled contigs. But hifiasm will only output .gfa files. So you need to convert .gfa file to .fa file using the line below (obviously use your own file names and paths)
+
+```
+awk '/^S/{print ">"$2"\n"$3}' assembly.gfa > assembly.fa
+```
+
+Then, run BUSCO with:
+
+```
+#!/bin/sh
+#SBATCH --job-name yshin_oocatochus_busco
+#SBATCH --nodes=10
+#SBATCH --mem=100gb
+#SBATCH --time=100:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=yshin@amnh.org
+#SBATCH --output=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/busco_outfiles/busco-%j-%x.out
+#SBATCH --error=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/busco_errfiles/busco-%j-%x.err
+
+# conda init
+
+source ~/.bash_profile
+conda activate mytools
+
+Oocatochus_assembly="/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm.bp.p_ctg.fa"
+busco -m genome -i $Oocatochus_assembly -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/busco_outfiles -l sauropsida_odb10 -f metaeuk --offline --download_path /home/yshin/mendel-nas1/snake_genome_ass/busco
+```
