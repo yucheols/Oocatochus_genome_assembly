@@ -217,6 +217,5 @@ quast_out %>%
         axis.title.y = element_text(margin = margin(r = 20)))
 
 ```
-
 This will produce a plot that looks like:
 ![Rplot1](/R/Rplots/Fig_N50_N70.png)
