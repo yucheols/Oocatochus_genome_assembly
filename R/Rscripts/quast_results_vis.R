@@ -27,4 +27,16 @@ print(key_metrics)
 ###  plot N50 and N75 // N50 is given in bp == use mutate() and divide up the raw value of N50 by 1e6 (10^6) to convert the value to Mb 
 quast_out %>%
   filter(metric %in% c('N50', 'N75')) %>%
-  mutate()
+  mutate(value_mb = value / 1e6,
+         metric = fct_relevel(metric, 'N50', 'N75')) %>%
+  ggplot(aes(x = metric, y = value_mb, fill = metric)) +
+  geom_col(width = 0.6, color = 'black', size = 1.0) +
+  xlab('Metric') + ylab('Value (Mb)') +
+  theme_classic() +
+  theme(legend.position = 'none',
+        panel.border = element_rect(fill = NA),
+        panel.grid.major = element_line(),
+        axis.text = element_text(size = 16),
+        axis.title = element_text(size = 19),
+        axis.title.x = element_text(margin = margin(t = 20)),
+        axis.title.y = element_text(margin = margin(r = 20)))
