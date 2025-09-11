@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash  # explicitly tell SLURM to use bash
 #SBATCH --job-name yshin_kmer_oocatochus
 #SBATCH --nodes=1
 #SBATCH --mem=60gb
