@@ -51,9 +51,10 @@ conda activate new_conda_env
 
 ## 2) *k*-mer analysis of raw reads using jellyfish
 Use the following script to submit a jellyfish job to Mendel
+__*NOTE:*__ In order for jellyfish to run, you need to explicitly tell SLURM to use bash (#!/bin/bash) rather than your default shell (#!/bin/sh)
 
 ```
-#!/bin/sh
+#!/bin/bash  # explicitly tell SLURM to use bash
 #SBATCH --job-name yshin_kmer_oocatochus
 #SBATCH --nodes=1
 #SBATCH --mem=60gb
