@@ -132,3 +132,35 @@ busco -m genome -i $Oocatochus_assembly -o /home/yshin/mendel-nas1/snake_genome_
 __*NOTE:*__ If you intend to run BUSCO in offline mode, make sure to download the BUSCO sauropsida dataset before running the analysis. The dataset will be downloaded as a compressed file. Unpack this file in whatever directory you want to use, and *make sure* to specify the path to unpacked BUSCO file under the -l parameter. Otherwise the analysis will crash.  
 
 ## 5) Genome stats with QUAST
+Run the script below on Mendel to get reference-free stats for your genome assembly (e.g., N50, L50, # of contigs, etc.)
+QUAST has several different parameters. For example:
+ - -o: output directory
+ - -r: path to a reference genome
+
+At this time, we are only interested in getting the reference-free stats. So we do not need to flag the -r parameter.
+
+```
+#!/bin/sh
+#SBATCH --job-name yshin_O_rufo_quast
+#SBATCH --nodes=1
+#SBATCH --mem=60gb
+#SBATCH --cpus-per-task=30
+#SBATCH --time=40:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=yshin@amnh.org
+#SBATCH --output=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_outfiles/quast_assembly-%j-%x.out
+#SBATCH --error=/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_errfiles/quast_assembly-%j-%x.err
+
+#conda init
+
+source ~/.bash_profile
+conda activate quast
+
+quast.py /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/hifiasm_outfiles/Oocatochus_rufodorsatus_v1.asm.bp.p_ctg.fa -o /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_outfiles
+```
+
+The above script should run smoothly. Now, move the QUAST output files from Mendel to your local device for easier viewing and data visualization. Since these files are inside a directory and we want to move the whole directory, the regular scp does not work here. Instead, use scp -r
+
+```
+scp -r yshin@mendel.sdmz.amnh.org:/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_outfiles ./outfiles
+```
