@@ -164,6 +164,6 @@ The above script should run smoothly. Now, move the QUAST output files from Mend
 ```
 scp -r yshin@mendel.sdmz.amnh.org:/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_outfiles ./outfiles
 ```
-The below explanations were given by __*the one and only*__ Dr. Amanda Markee regarding the concepts of L50 and N50 (https://github.com/amandamarkee) 
+The below explanations were given by __*the one and only*  Dr. Amanda Markee__ regarding the concepts of L50 and N50 (https://github.com/amandamarkee) 
 - __L50:__ N of puzzle pieces to reach 50% of your estimated genome size (lower L50 = less pieces = more contiguous = better assembly)
 - __N50:__ N of base pairs (higher N50 = more base pairs = longer squences = better assembly)
