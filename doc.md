@@ -166,4 +166,57 @@ scp -r yshin@mendel.sdmz.amnh.org:/home/yshin/mendel-nas1/snake_genome_ass/Oocat
 ```
 The below explanations were given by __*the one and only*  Dr. Amanda Markee__ regarding the concepts of L50 and N50 (https://github.com/amandamarkee) 
 - __L50:__ N of puzzle pieces to reach 50% of your estimated genome size (lower L50 = less pieces = more contiguous = better assembly)
-- __N50:__ N of base pairs (higher N50 = more base pairs = longer squences = better assembly)
+- __N50:__ N of base pairs to reach 50% of your estimated genome size (higher N50 = more base pairs = longer squences = better assembly)
+
+### Visualize QUAST results in R
+We can visualize QUAST result using R. This is not necessary but I thought it would be a fun practice.
+
+For example, in R, we can plot N50 and N75 using ggplot2
+```
+#####  visualize QUAST reference-free results in R
+
+# clean working environment
+rm(list = ls(all.names = T))
+gc()
+
+# load packages
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(forcats)
+
+###  load the QUAST result report .tsv file
+quast_out <- read_tsv('//wsl.localhost/Ubuntu/home/yshin/Oocatochus_genome_assembly/outfiles/quast_outfiles/report.tsv', show_col_types = F)
+quast_out <- quast_out %>% rename(metric = Assembly, 
+                                  value = Oocatochus_rufodorsatus_v1.asm.bp.p_ctg)
+
+print(quast_out)
+
+###  keep metrics of interest
+key_metrics <- quast_out %>%
+  filter(metric %in% c('Total length', '# contigs', 'Largest contig', 'GC (%)', 'N50', 'N75', 'L50', 'L75'))
+
+print(key_metrics)
+
+###  plot N50 and N75 // N50 is given in bp == use mutate() and divide up the raw value of N50 by 1e6 (10^6) to convert the value to Mb 
+quast_out %>%
+  filter(metric %in% c('N50', 'N75')) %>%
+  mutate(value_mb = value / 1e6,
+         metric = fct_relevel(metric, 'N50', 'N75')) %>%
+  ggplot(aes(x = metric, y = value_mb, fill = metric)) +
+  geom_col(width = 0.6, color = 'black', size = 1.0) +
+  xlab('Metric') + ylab('Value (Mb)') +
+  theme_classic() +
+  theme(legend.position = 'none',
+        panel.border = element_rect(fill = NA),
+        panel.grid.major = element_line(),
+        axis.text = element_text(size = 16),
+        axis.title = element_text(size = 19),
+        axis.title.x = element_text(margin = margin(t = 20)),
+        axis.title.y = element_text(margin = margin(r = 20)))
+
+```
+
+This will produce a plot that looks like:
+![Rplot1](/R/Rplots/Fig_N50_N70.png)
