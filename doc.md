@@ -1,5 +1,5 @@
 # Whole-genome assembly of the Frog-eating ratsnake (*Oocatochus rufodorsatus*)
-*Oocatochus rufodorsatus* PacBio HiFi genome assembly. Workflow adapted from: https://github.com/danielagarciacobos4/PacBio_GenomeAssembly_annotation
+*Oocatochus rufodorsatus* PacBio HiFi genome assembly. Workflow adapted from: https://github.com/danielagarciacobos4/PacBio_GenomeAssembly_annotation and https://github.com/amandamarkee/actias-luna-genome
 
 1. __Basic structure of a SLURM job script__
 2. __*k*-mer analysis of raw reads using jellyfish__
@@ -164,3 +164,6 @@ The above script should run smoothly. Now, move the QUAST output files from Mend
 ```
 scp -r yshin@mendel.sdmz.amnh.org:/home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/quast_outfiles ./outfiles
 ```
+The below explanations were given by __*the one and only*__ Dr. Amanda Markee regarding the concepts of L50 and N50 (https://github.com/amandamarkee) 
+L50: N of puzzle pieces to reach 50% of your estimated genome size (lower L50 = less pieces = more contiguous = better assembly)
+N50: N of base pairs (higher N50 = more base pairs = longer squences = better assembly)
