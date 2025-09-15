@@ -80,6 +80,8 @@ jellyfish histo /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/Shell/jellyf
 - -o Oocatochus_rufodorsatus_kmer.jf: Output file prefix in jellyfish binary format
 - <(zcat /home/yshin/mendel-nas1/snake_genome_ass/Oocatochus/24ORCC001.hifireads.fastq.gz): jellyfish cannot handle gzipped files directly. zcat decompresses the gzipped FASTQ file without creating a new file on the disk ("<(...)" acts as a temporary file)
 
+### Visualizing jellyfish histogram in R 
+
 ## 3) Genome assembly with hifiasm
 Use the following script to submit a hifiasm job to Mendel
 
