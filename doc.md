@@ -158,7 +158,7 @@ plot_busco(busco)
 ```
 This will give you a plot that looks like this:
 
-[Rplot1](/R/Rplots/busco_plot.png)
+![Rplot1](/R/Rplots/busco_plot.png)
 
 
 
