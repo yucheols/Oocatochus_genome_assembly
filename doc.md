@@ -133,6 +133,33 @@ busco -m genome -i $Oocatochus_assembly -o /home/yshin/mendel-nas1/snake_genome_
 ```
 __*NOTE:*__ If you intend to run BUSCO in offline mode, make sure to download the BUSCO sauropsida dataset before running the analysis. The dataset will be downloaded as a compressed file. Unpack this file in whatever directory you want to use, and *make sure* to specify the path to unpacked BUSCO file under the -l parameter. Otherwise the analysis will crash.  
 
+### Visualizing BUSCO results in R
+Use the script below to visualize BUSCO results, using the *cogeqc* R package.
+
+```
+#####  visualize BUSCO results in R
+
+# clean working environment
+rm(list = ls(all.names = T))
+gc()
+
+# load packages
+library(cogeqc)
+
+### load BUSCO results
+# read as lines
+busco <- cogeqc::read_busco('Rdata/busco/')
+print(busco)
+
+# plot
+plot_busco(busco)
+```
+This will give you a plot that looks like this:
+
+[Rplot1](/R/Rplots/busco_plot.png)
+
+
+
 ## 5) Genome stats with QUAST
 Run the script below on Mendel to get reference-free stats for your genome assembly (e.g., N50, L50, # of contigs, etc.)
 QUAST has several different parameters. For example:
@@ -220,4 +247,4 @@ quast_out %>%
 
 ```
 This will produce a plot that looks like:
-![Rplot1](/R/Rplots/Fig_N50_N70.png)
+![Rplot2](/R/Rplots/Fig_N50_N70.png)
