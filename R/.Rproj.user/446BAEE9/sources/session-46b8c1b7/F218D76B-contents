@@ -10,11 +10,11 @@ library(ggplot2)
 
 
 ### load BUSCO results
-# read as lines
-busco <- cogeqc::read_busco('Rdata/busco/')
+busco <- cogeqc::read_busco('Rdata/busco/short_summary.specific.sauropsida_odb10.Oocatochus_BUSCO.txt')
 print(busco)
 
 # plot
 plot_busco(busco) +
   theme(axis.text = element_text(size = 14),
         axis.title = element_text(size = 18))
+
